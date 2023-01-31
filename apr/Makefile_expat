@@ -1,0 +1,7 @@
+all:libexpat-1.la
+
+libexpat-1.la:
+	PWD=`pwd`
+	./configure --prefix=$(PWD)/apr/expat
+	make
+	make install
