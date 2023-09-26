@@ -1,5 +1,5 @@
-APR=apr-1.7.1
-APRUTIL=apr-util-1.6.2
+APR=apr-1.7.4
+APRUTIL=apr-util-1.6.3
 EXPAT=expat-2.5.0
 
 all: $(APR) $(EXPAT) $(APRUTIL) buildapr
@@ -17,12 +17,12 @@ $(EXPAT):
 	tar -xf $(EXPAT).tar.gz
 
 buildapr:
-	cp Makefile_apr $(APR)-rc2
-	make -C $(APR)-rc2 -f Makefile_apr
+	cp Makefile_apr $(APR)
+	make -C $(APR) -f Makefile_apr
 	cp Makefile_expat $(EXPAT)
 	make -C $(EXPAT) -f Makefile_expat
-	cp Makefile_aprutil $(APRUTIL)-rc3
-	make -C $(APRUTIL)-rc3 -f Makefile_aprutil
+	cp Makefile_aprutil $(APRUTIL)
+	make -C $(APRUTIL) -f Makefile_aprutil
 
 clean:
 	rm -rf apr-*

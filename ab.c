@@ -1286,7 +1286,7 @@ static void output_results(void)
 
         /* Sorted on total connect times */
         if (percentile && (count > 1)) {
-            printf("\nPercentage of the requests served within a certain time (ms)\n");
+            printf("\nPercentage of the requests served within a certain time (us)\n");
             for (i = 0; i < sizeof(percs) / sizeof(int); i++) {
                 if (percs[i] <= 0)
                     printf(" 0%%  <0> (never)\n");
@@ -1459,7 +1459,7 @@ static void output_html_results(void)
         total    = ap_round_ms(total);
 
         if (count > 0) { /* avoid division by zero (if 0 count) */
-            printf("<tr %s><th %s colspan=4>Connection Times (ms)</th></tr>\n",
+            printf("<tr %s><th %s colspan=4>Connection Times (us)</th></tr>\n",
                trstring, tdstring);
             printf("<tr %s><th %s>&nbsp;</th> <th %s>min</th>   <th %s>avg</th>   <th %s>max</th></tr>\n",
                trstring, tdstring, tdstring, tdstring, tdstring);
@@ -1941,8 +1941,7 @@ read_more:
                 printf("LOG: Response code = %s\n", respcode);
             }
 
-            // c->keepalive = (keepalive && xstrcasestr(c->cbuff, "Keep-Alive"));
-            c->keepalive = (keepalive);
+            c->keepalive = (keepalive && xstrcasestr(c->cbuff, "Keep-Alive"));
             if (c->keepalive) {
                 const char *cl = xstrcasestr(c->cbuff, "Content-Length:");
                 if (cl && method != HEAD) {
